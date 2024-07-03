@@ -14,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
 // Función para obtener películas de TMDb
 const obtenerPeliculas = async () => {
   try {
-    const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+    const response = await axios.get('https://api.themoviedb.org/3/trending/movie/day?language=en-US', {
       params: {
         api_key: process.env.TMDB_API_KEY
       }
