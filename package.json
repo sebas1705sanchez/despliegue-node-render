@@ -1,20 +1,16 @@
 {
   "name": "nodejs-render-tutorial",
   "version": "1.0.0",
+  "description": "API que se conecta al servicio de The Movie Database",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "sebastian",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
+    "axios": "^0.21.4",
     "express": "^4.19.2"
-  },
-  "description": "",
-  "devDependencies": {
-    "nodemon": "^3.1.4"
   }
 }

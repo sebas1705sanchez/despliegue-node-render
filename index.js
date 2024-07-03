@@ -1,44 +1,28 @@
-require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 
 const app = express();
-const PORT = 3000;
 
-// Middleware para manejo de errores
-const errorHandler = (err, req, res, next) => {
-  console.error('Error:', err.message);
-  res.status(500).json({ error: 'Error al obtener películas' });
-};
-
-// Función para obtener películas de TMDb
-const obtenerPeliculas = async () => {
+app.get('/trending/movie/day?', async (req, res) => {
   try {
+    // Realizar solicitud a la API de TMDb para obtener películas
     const response = await axios.get('https://api.themoviedb.org/3', {
       params: {
-        api_key: "c84b15de02b182bd760ca972c743c53f"
+        api_key: 'c84b15de02b182bd760ca972c743c53f' // Reemplaza 'TU_API_KEY' con tu propia clave de API de TMDb
       }
     });
-    return response.data.results;
-  } catch (error) {
-    throw new Error('Error al obtener películas de TMDb');
-  }
-};
 
-// Ruta para obtener películas
-app.get('/trending/movie/day?language=en-US', async (req, res, next) => {
-  try {
-    const peliculas = await obtenerPeliculas();
+    // Obtener los datos de las películas de la respuesta
+    const peliculas = response.data.results;
+
+    // Enviar las películas como respuesta
     res.json(peliculas);
   } catch (error) {
-    next(error);
+    console.error('Error al obtener películas de TMDb:', error);
+    res.status(500).json({ error: 'Error al obtener películas' });
   }
 });
 
-// Middleware de manejo de errores
-app.use(errorHandler);
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+app.listen(3000, () => {
+  console.log('Servidor escuchando en el puerto 3000');
 });
