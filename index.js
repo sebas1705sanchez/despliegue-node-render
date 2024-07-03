@@ -14,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
 // Función para obtener películas de TMDb
 const obtenerPeliculas = async () => {
   try {
-    const response = await axios.get('https://api.themoviedb.org/3/trending/movie/day?', {
+    const response = await axios.get('https://api.themoviedb.org/3', {
       params: {
         api_key: "c84b15de02b182bd760ca972c743c53f"
       }
@@ -26,7 +26,7 @@ const obtenerPeliculas = async () => {
 };
 
 // Ruta para obtener películas
-app.get('/peliculas', async (req, res, next) => {
+app.get('/trending/movie/day?language=en-US', async (req, res, next) => {
   try {
     const peliculas = await obtenerPeliculas();
     res.json(peliculas);
